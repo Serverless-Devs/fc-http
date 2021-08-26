@@ -1,4 +1,3 @@
-const URL = require('url');
 const serverless = require('serverless-http');
 const makeResolver = (ctx) => {
   return data => {
@@ -14,7 +13,7 @@ const makeResolver = (ctx) => {
   };
 }
 
-const CONTEXT_HEADER_NAME = 'x-fc-express-context';
+const CONTEXT_HEADER_NAME = 'x-fc-http-context';
 
 const getRequestHeaders = (ctx) => {
   const request = ctx.request;
@@ -38,14 +37,11 @@ const mapContextToHttpRequest = (ctx) => {
   headers[CONTEXT_HEADER_NAME] = encodeURIComponent(JSON.stringify(ctx.context));
   return {
     method: request.method,
-    path: URL.format({ pathname: request.path, query: request.queries }),
+    path: request.path,
     url: request.url,
     headers,
     socketPath: getSocketPath(),
-    // protocol: `${headers['x-forwarded-proto']}:`,
-    // host: headers.host,
-    // hostname: headers.Host, // Alias for host
-    // port: headers['X-Forwarded-Port']
+    queryStringParameters: request.queries,
   };
 }
 
@@ -55,25 +51,30 @@ const formatCtx = (first, second, thrid) => {
   }
 }
 
-const getContentType = (params) => {
-  return params.contentTypeHeader ? params.contentTypeHeader.split(';')[0] : '';
-}
-
 const forwardResponse = (response, resolver) => {
-  const statusCode = response.statusCode;
-  const headers = response.headers;
-  const contentType = getContentType({ contentTypeHeader: headers['content-type'] });
-  const successResponse = { statusCode, body: response.body, headers, contentType };
-  resolver(successResponse);
+  const { statusCode, headers, body, isBase64Encoded } = response;
+  resolver({ statusCode, headers, body, isBase64Encoded });
 }
 
 module.exports = (app, opts) => {
   return async (first, second, thrid) => {
     const ctx = formatCtx(first, second, thrid);
     const resolver = makeResolver(ctx);
+
+    // http emit error
+    ctx.request.on('error', err => {
+      const errorResponse = { statusCode: 502, body: err.message };
+      return forwardResponse(errorResponse, resolver);
+    });
+
     const event = mapContextToHttpRequest(ctx);
     const serverlessHandler = serverless(app, opts);
-    const data = await serverlessHandler(event, second);
-    forwardResponse(data, resolver)
+    try {
+      const data = await serverlessHandler(event, second)
+      forwardResponse(data, resolver)
+    } catch (err) { // 异常报错
+      const errorResponse = { statusCode: 500, body: e.message }
+      forwardResponse(errorResponse, resolver)
+    }
   }
 }
