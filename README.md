@@ -11,7 +11,7 @@ const app = new Koa();
 
 app.use(/* register your middleware as normal */);
 
-module.exports.handler = serverless(app);
+exports.handler = serverless(app);
 
 ```
 - Koa 路由示例
@@ -88,7 +88,7 @@ https://xxx.cn-hangzhou.fc.aliyuncs.com/2016-08-15/proxy/dk-http-demo/api/new ->
 
 一些例子
 ```
-module.exports.handler = serverless(app, {
+exports.handler = serverless(app, {
   request: {
     key: 'value'
   },
@@ -97,7 +97,7 @@ module.exports.handler = serverless(app, {
   }
 })
 
-module.exports.handler = serverless(app, {
+exports.handler = serverless(app, {
   request(request, event, context) {
     request.context = event.requestContext;
   },
