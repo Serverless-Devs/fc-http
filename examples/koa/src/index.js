@@ -1,9 +1,9 @@
 const serverless = require('@serverless-devs/fc-http');
 const Koa = require('koa');
-var Router = require("koa-router");
-var router = new Router()
-
+const Router = require("koa-router");
+const router = new Router()
 const app = new Koa();
+
 router
   .get("/koa", (ctx) => {
     ctx.body = 'Hello Koa!';
