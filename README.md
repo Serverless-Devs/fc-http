@@ -1,7 +1,10 @@
 # fc-http
-此模块可以方便的将传统的web框架使用`nodejs runtime`的形式在阿里云函数计算上运行。
 
-## 支持框架
+此模块可以方便的将传统的 web 框架使用 `nodejs runtime` 的形式在阿里云函数计算上运行。
+- 支持 async/await
+- Node版本 8+
+
+## 框架支持
 (`*` 代表暂时不完全支持)
 - Connect
 - Express
@@ -13,43 +16,29 @@
 - Restify *
 - Polka *
 - Loopback *
+
 ## 快速体验
-### Koa
-- Koa 基本示例
 ```
-const serverless = require('fc-http');
-const Koa = require('koa'); // or any supported framework
-
-const app = new Koa();
-
-app.use(/* register your middleware as normal */);
-
-exports.handler = serverless(app);
-
+$ npm i @serverless-devs/fc-http
 ```
-- Koa 路由示例
+### Express
+- 基本示例
 ```
-const serverless = require('fc-http');
-const Koa = require('koa');
-const Router = require("koa-router");
-const router = new Router()
-const app = new Koa();
+const serverless = require('@serverless-devs/fc-http');
+const express = require('express')
+const app = express()
 
-router
-  .get("/aaa", (ctx) => {
-    ctx.body = "aaaa";
-  })
-  .get("/bbb", (ctx) => {
-    ctx.body = "bbbb";
-  })
-  .get("/", (ctx) => {
-    ctx.body = "首页";
-  })
-app.use(router.routes())
+app.get('/user', (req, res) => {
+  res.send('hello user!')
+})
 
-exports.handler = serverless(app);
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
+exports.handler = serverless(app)
 ```
+更多例子见 `examples`
 
 ## 高级选项 Options
 
@@ -60,8 +49,8 @@ fc-http 接受第二个参数options，它可以配置：
 
 - 配置前
 ```
-router.get("/new", (ctx) => {
-    ctx.body = "hello world";
+app.get("/", (ctx) => {
+  res.send('Hello World!')
 })
 
 exports.handler = serverless(app);
@@ -73,8 +62,8 @@ exports.handler = serverless(app);
 - 配置后
 
 ```
-router.get("/new", (ctx) => {
-    ctx.body = "hello world";
+app.get("/", (ctx) => {
+  res.send('Hello World!')
 })
 
 exports.handler = serverless(app, {

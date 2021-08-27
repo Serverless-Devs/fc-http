@@ -1,0 +1,35 @@
+edition: 1.0.0          #  命令行YAML规范版本，遵循语义化版本（Semantic Versioning）规范
+name: fc-http-demo       #  项目名称
+access: default  #  秘钥别名
+
+services:
+  fc-deploy-test: #  服务名称
+    component: devsapp/fc  # 组件名称
+    props: #  组件的属性值
+      region: cn-hangzhou
+      service:
+        name: fc-http-service
+        description: 'demo for fc-http component'
+        internetAccess: true
+      function:
+        name: express
+        description: this is a test
+        runtime: nodejs12
+        codeUri: ./src
+        handler: index.handler
+        memorySize: 128
+        timeout: 10
+      triggers:
+        - name: httpTrigger
+          type: http
+          config:
+            authType: anonymous
+            methods:
+              - GET
+              - POST
+      customDomains:
+        - domainName: auto
+          protocol: HTTP
+          routeConfigs:
+            - path: /*
+# 函数计算FC组件文档参考地址：https://github.com/devsapp/fc

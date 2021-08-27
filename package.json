@@ -20,7 +20,7 @@
   "dependencies": {
     "serverless-http": "^2.7.0"
   },
-  "author": "huangfushan",
+  "author": "@serverless-devs",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Serverless-Devs/fc-http/issues"
