@@ -1,5 +1,18 @@
 # fc-http
+此模块可以方便的将传统的web框架使用`nodejs runtime`的形式在阿里云函数计算上运行。
 
+## 支持框架
+(`*` 代表暂时不完全支持)
+- Connect
+- Express
+- Koa
+- Restana
+- Sails *
+- Hapi *
+- Fastify *
+- Restify *
+- Polka *
+- Loopback *
 ## 快速体验
 ### Koa
 - Koa 基本示例
