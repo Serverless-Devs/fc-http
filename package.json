@@ -7,14 +7,20 @@
     "type": "git",
     "url": "git+https://github.com/Serverless-Devs/fc-http.git"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "http://registry.npmjs.org"
+  },
   "keywords": [
     "fc",
-    "http"
+    "http",
+    "Serverless-Devs",
+    "Serverless-Core"
   ],
   "dependencies": {
     "serverless-http": "^2.7.0"
   },
-  "author": "serverless-devs",
+  "author": "huangfushan",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Serverless-Devs/fc-http/issues"
