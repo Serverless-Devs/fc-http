@@ -12,7 +12,7 @@ services:
         description: 'demo for fc-http component'
         internetAccess: true
       function:
-        name: connect
+        name: restana
         description: this is a test
         runtime: nodejs12
         codeUri: ./src

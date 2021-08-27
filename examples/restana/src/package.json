@@ -1,11 +1,11 @@
 {
-  "name": "express",
+  "name": "restana",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "dependencies": {
     "@serverless-devs/fc-http": "latest",
-    "express": "^4.17.1"
+    "restana": "^4.9.1"
   },
   "devDependencies": {},
   "scripts": {
