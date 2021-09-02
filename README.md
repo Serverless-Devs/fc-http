@@ -49,7 +49,7 @@ fc-http 接受第二个参数options，它可以配置：
 
 - 配置前
 ```
-app.get("/", (ctx) => {
+app.get("/new", (ctx) => {
   res.send('Hello World!')
 })
 
@@ -62,7 +62,7 @@ exports.handler = serverless(app);
 - 配置后
 
 ```
-app.get("/", (ctx) => {
+app.get("/new", (ctx) => {
   res.send('Hello World!')
 })
 
