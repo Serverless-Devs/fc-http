@@ -41,7 +41,9 @@ const mapContextToHttpRequest = (ctx) => {
     url: request.url,
     headers,
     socketPath: getSocketPath(),
+    // 针对 aws 的属性
     queryStringParameters: request.queries,
+    httpMethod: request.method,
   };
 }
 
@@ -73,7 +75,7 @@ module.exports = (app, opts) => {
       const data = await serverlessHandler(event, second)
       forwardResponse(data, resolver)
     } catch (err) { // 异常报错
-      const errorResponse = { statusCode: 500, body: e.message }
+      const errorResponse = { statusCode: 500, body: err.message }
       forwardResponse(errorResponse, resolver)
     }
   }
