@@ -1,4 +1,6 @@
 const serverless = require('serverless-http');
+const body = require('body');
+
 const makeResolver = (ctx) => {
   return data => {
     const response = ctx.response;
@@ -30,8 +32,21 @@ const getSocketPath = () => {
     return `/tmp/server-${socketPathSuffix}.sock`;
   }
 }
+const getBody = async (request) =>
+  new Promise((resolve, reject) => {
+    if (!request.on) {
+      resolve('');
+    }
+    try {
+      body(request, (e, b) => {
+        resolve(b);
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
 
-const mapContextToHttpRequest = (ctx) => {
+const mapContextToHttpRequest = async (ctx) => {
   const headers = getRequestHeaders(ctx);
   const request = ctx.request;
   headers[CONTEXT_HEADER_NAME] = encodeURIComponent(JSON.stringify(ctx.context));
@@ -41,6 +56,7 @@ const mapContextToHttpRequest = (ctx) => {
     url: request.url,
     headers,
     socketPath: getSocketPath(),
+    body: await getBody(ctx.request),
     // 针对 aws 的属性
     queryStringParameters: request.queries,
     httpMethod: request.method,
@@ -69,7 +85,7 @@ module.exports = (app, opts) => {
       return forwardResponse(errorResponse, resolver);
     });
 
-    const event = mapContextToHttpRequest(ctx);
+    const event = await mapContextToHttpRequest(ctx);
     const serverlessHandler = serverless(app, opts);
     try {
       const data = await serverlessHandler(event, second)
