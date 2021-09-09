@@ -32,7 +32,8 @@ $ s deploy
 npm init nuxt-app <project-name>
 ```
 
-- 复制 `.nuxt` 目录以及 `nuxt.config.js` 文件到 examples/nuxt/src 下
+- 替换 `.nuxt` 文件夹
+- 修改 `nuxt.config.js` 文件内容
 
 - s deploy 部署
 

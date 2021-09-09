@@ -2,7 +2,8 @@
   {
     "name": "index",
     "path": "/",
-    "component": "/Users/huangfushan/project/testt/nodejs-nuxt/pages/index.vue",
-    "chunkName": "pages/index"
+    "component": "/Users/huangfushan/project/testt/test/nuxt-app/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_d6ad2360"
   }
 ]
