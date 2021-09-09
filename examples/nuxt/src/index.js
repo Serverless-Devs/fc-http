@@ -4,7 +4,7 @@ const config = require('./nuxt.config.js')
 
 const nuxt = new Nuxt({ ...config, dev: false, _start: true, telemetry: false })
 
-exports.handler = async (res, req, context) => {
+exports.handler = async (req, res, context) => {
   await nuxt.ready()
-  serverless(nuxt.server.app)(res, req, context)
+  serverless(nuxt.server.app)(req, res, context)
 };
