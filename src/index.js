@@ -4,7 +4,11 @@ const body = require('body');
 const makeResolver = (ctx) => {
   return data => {
     const response = ctx.response;
-    response.setStatusCode(data.statusCode);
+    if (response.setStatusCode) {
+      response.setStatusCode(data.statusCode);
+    } else {
+      response.status = data.statusCode;
+    }
     for (const key in data.headers) {
       if (data.headers.hasOwnProperty(key)) {
         const value = data.headers[key];
