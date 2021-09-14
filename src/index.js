@@ -62,7 +62,8 @@ const mapContextToHttpRequest = async (ctx) => {
     socketPath: getSocketPath(),
     body: await getBody(ctx.request),
     // 针对 aws 的属性
-    queryStringParameters: request.queries,
+    requestContext: ctx.context, //  把context 挂在到req.requestContext上
+    queryStringParameters: request.queries || request.query, // url 后缀 params 参数
     httpMethod: request.method,
   };
 }
