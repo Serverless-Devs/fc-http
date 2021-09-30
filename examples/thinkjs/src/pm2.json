@@ -1,0 +1,15 @@
+{
+  "apps": [{
+    "name": "src",
+    "script": "production.js",
+    "cwd": "/Users/huangfushan/project/serveless/fc-http/examples/thinkjs-start/src",
+    "exec_mode": "fork",
+    "max_memory_restart": "1G",
+    "autorestart": true,
+    "node_args": [],
+    "args": [],
+    "env": {
+      
+    }
+  }]
+}
