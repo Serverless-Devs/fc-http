@@ -15,7 +15,11 @@ const makeResolver = (ctx) => {
         response.setHeader(key, value);
       }
     }
-    response.send(data.body);
+    if (response.send) {
+      response.send(data.body);
+    } else {
+      response.end(data.body);
+    }
   };
 }
 
