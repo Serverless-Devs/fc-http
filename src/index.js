@@ -1,5 +1,5 @@
 const serverless = require('serverless-http');
-const body = require('body');
+const getRawBody = require('raw-body');
 
 const makeResolver = (ctx) => {
   return data => {
@@ -46,9 +46,7 @@ const getBody = async (request) =>
       resolve('');
     }
     try {
-      body(request, (e, b) => {
-        resolve(b);
-      });
+      getRawBody(request).then(resolve, reject);
     } catch (e) {
       reject(e);
     }
