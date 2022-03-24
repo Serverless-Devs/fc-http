@@ -81,8 +81,8 @@ const formatCtx = (first, second, thrid) => {
 }
 
 const forwardResponse = (response, resolver) => {
-  const { statusCode, headers, body, isBase64Encoded } = response;
-  resolver({ statusCode, headers, body, isBase64Encoded });
+  const { statusCode, headers, body, isBase64Encoded, multiValueHeaders } = response;
+  resolver({ statusCode, headers, body, isBase64Encoded, multiValueHeaders });
 }
 
 module.exports = (app, opts) => {
