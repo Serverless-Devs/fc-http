@@ -15,6 +15,10 @@ const makeResolver = (ctx) => {
         response.setHeader(key, value);
       }
     }
+    for (const key in data.multiValueHeaders) {
+      const value = data.multiValueHeaders[key]
+      response.setHeader(key, value)
+    }
     if (response.send) {
       response.send(data.body);
     } else {
