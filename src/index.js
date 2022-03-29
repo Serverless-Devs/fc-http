@@ -73,7 +73,6 @@ const mapContextToHttpRequest = async (ctx) => {
     httpMethod: request.method,
     // 原始的函数计算请求对象，方便获取其中的一些信息
     originFCRequest: request
-
   };
 }
 
