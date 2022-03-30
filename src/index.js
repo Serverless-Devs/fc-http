@@ -71,6 +71,8 @@ const mapContextToHttpRequest = async (ctx) => {
     requestContext: ctx.context, //  把context 挂在到req.requestContext上
     queryStringParameters: request.queries || request.query, // url 后缀 params 参数
     httpMethod: request.method,
+    // 原始的函数计算请求对象，方便获取其中的一些信息
+    fcRequest: request
   };
 }
 
