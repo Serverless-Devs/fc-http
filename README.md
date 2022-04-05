@@ -16,6 +16,7 @@
   - [快速体验](#快速体验)
     - [Express基本示例](#Express基本示例)
     - [高级选项](#高级选项)
+  - [示例代码](https://github.com/devsapp/start-web-framework/tree/master/web-framework/nodejs/nodejs-runtime)
 - [关于我们](#关于我们)
 
 ## 快速开始
@@ -51,7 +52,6 @@ function(request, response, context) {}
 ## 框架支持
 FC-http目前已经支持主流Nodejs框架快速接入，并提供模版示例。通过执行指令 如：`s init express-app`快速体验。
 
-- Connect: `s init connect-app`
 - Express: `s init express-app`
 - Koa: `s init koa-app`
 - Hapi: `s init hapi-app`
@@ -59,6 +59,7 @@ FC-http目前已经支持主流Nodejs框架快速接入，并提供模版示例�
 - nest: `s init nest-app`
 - nuxt: `s init nuxt-app`
 - thinkjs: `s init thinkjs-app`
+- Connect: `s init connect-app`
 - Sails
 - Fastify
 - Restify
