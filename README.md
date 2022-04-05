@@ -1,27 +1,76 @@
 # fc-http
+<p align="center" class="flex justify-center">
+  <a href="https://nodejs.org/en/" class="ml-1">
+    <img src="https://img.shields.io/badge/node-%3E%3D%2010.8.0-brightgreen" alt="node.js version">
+  </a>
+  <a href="https://github.com/devsapp/website-fc/blob/master/LICENSE" class="ml-1">
+    <img src="https://img.shields.io/badge/License-MIT-green" alt="license">
+  </a>
+</p>
 
-此模块可以方便的将传统的 web 框架使用 `nodejs runtime` 的形式在阿里云函数计算上运行。
-- 支持 async/await
-- Node版本 8+
+此模块可以方便的将传统的 web 框架使用 [Nodejs runtime](https://help.aliyun.com/document_detail/58011.html) 的形式运行在阿里云函数计算。
+
+- [快速开始](#快速开始)
+  - [为什么要使用Nodejs runtime](#为什么要使用Nodejs runtime)
+  - [框架支持](#框架支持)
+  - [快速体验](#快速体验)
+    - [Express基本示例](#Express基本示例)
+    - [高级选项](#高级选项)
+- [关于我们](#关于我们)
+
+## 快速开始
+### 为什么要使用Nodejs runtime
+将nodejs应用部署在函数计算FC上，一般有下面几种方式
+- [原生Nodejs运行环境](https://help.aliyun.com/document_detail/58011.html)
+- [Custom Runtime](https://help.aliyun.com/document_detail/132044.html)
+- [Custom Container](https://help.aliyun.com/document_detail/179368.html)
+
+#### Nodejs Runtime
+Nodejs运行环境（简称`Nodejs Runtime`）支持Nodejs6到Nodejs14的版本，用于只需要提供入口函数如下：
+```
+function(request, response, context) {}
+```
+当有请求触发的时候，函数计算平台会调用这个方法，启动您的应用进行处理，参考[示例](https://github.com/devsapp/start-fc/tree/master/http-function/fc-http-node.js14/src)
+
+#### Custom Runtime
+`Custom Runtime`是自定义运行环境，您可以自定义应用的启动脚本`bootstrap`进行启动web服务器。很方便的将您的应用快速迁移到函数计算平台，参考[示例](https://github.com/devsapp/start-web-framework/blob/master/web-framework/nodejs/express/src/code/bootstrap)
+
+#### Custom Container
+使用`Custom Container`方式，开发者需要提前准备好镜像。这样能够实现最大的灵活性。
+
+> 从灵活性来看 `Custom Container` > `Custom Runtime` > `Nodejs Runtime`
+
+> 从性能来看 `Nodejs Runtime` > `Custom Runtime` > `Custom Container`
+
+而且 `Nodejs Runtime`还有以下优点：
+- 版本支持到`nodejs14`, `Custom Runtime`默认环境是`nodejs10`,否则需要将nodejs的二进制包，上传到当前的运行环境
+- 日志输出友好，相比`Custom Runtime`在`高级查询`更具有可读性
+- 支持[layer](https://help.aliyun.com/document_detail/193057.html)层，提取公共依赖。
+
 
 ## 框架支持
-(`*` 代表暂时不完全支持)
-- Connect
-- Express
-- Koa
-- Restana
-- Sails *
-- Hapi *
-- Fastify *
-- Restify *
-- Polka *
-- Loopback *
+FC-http目前已经支持主流Nodejs框架快速接入，并提供模版示例。通过执行指令 如：`s init express-app`快速体验。
+
+- Connect: `s init connect-app`
+- Express: `s init express-app`
+- Koa: `s init koa-app`
+- Hapi: `s init hapi-app`
+- Egg: `s init egg-app`
+- nest: `s init nest-app`
+- nuxt: `s init nuxt-app`
+- thinkjs: `s init thinkjs-app`
+- Sails
+- Fastify
+- Restify
+- Polka
+- Loopback
+
 
 ## 快速体验
 ```
 $ npm i @serverless-devs/fc-http
 ```
-### Express
+### Express基本示例
 - 基本示例
 ```
 const serverless = require('@serverless-devs/fc-http');
@@ -40,7 +89,7 @@ exports.handler = serverless(app)
 ```
 更多例子见 `examples`
 
-## 高级选项 Options
+## 高级选项
 
 fc-http 接受第二个参数options，它可以配置：
 
@@ -146,3 +195,13 @@ serverless(app, {
   }
 });
 ```
+
+# 关于我们
+- Serverless Devs 工具：
+    - 仓库：[https://www.github.com/serverless-devs/serverless-devs](https://www.github.com/serverless-devs/serverless-devs)    
+      > 欢迎帮我们增加一个 :star2: 
+    - 官网：[https://www.serverless-devs.com/](https://www.serverless-devs.com/)
+- 阿里云函数计算组件：
+    - 仓库：[https://github.com/devsapp/fc](https://github.com/devsapp/fc)
+    - 帮助文档：[https://www.serverless-devs.com/fc/readme](https://www.serverless-devs.com/fc/readme)
+- 钉钉交流群：33947367    
