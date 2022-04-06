@@ -15,6 +15,7 @@
   - [框架支持](#框架支持)
   - [快速体验](#快速体验)
     - [基本示例](#基本示例)
+    - [request详解](#request详解)
     - [高级选项](#高级选项)
   - [示例代码](https://github.com/devsapp/start-web-framework/tree/master/web-framework/nodejs/nodejs-runtime)
 - [关于我们](#关于我们)
@@ -89,6 +90,24 @@ app.get('/', (req, res) => {
 exports.handler = serverless(app)
 ```
 更多例子见 `examples`
+
+### request详解
+下面例子中，`req`参数可以获取一些有用的信息
+```
+app.get('/user', (req, res) => {
+  res.send('hello user!')
+})
+```
+| 字段名 | 类型 | 示例 | 描述
+| --- | --- | --- | --- |
+| method   | String |  GET    |  HTTP请求方法    |
+| path   | String |  /api    |  HTTP请求方法    |
+| headers   | Object类型	 |  {'content-type': 'text/plain','x-forwarded-proto': 'https' }    |  存放来自HTTP客户端的键值对。|
+| queries   | Object类型	 |  {name:'age'}    |  存放来自HTTP路径中的查询部分的键值对，值的类型可以为字符串或数组。|
+| clientIP   | String类型	 |  '42.120.75.232'    |  客户端的IP地址。|
+| fcRequest   | Object类型	 |  [详情参考](https://help.aliyun.com/document_detail/74757.html#section-960-nx8-b4i)    |  FC原始的 request参数|
+| fcContext   | Object类型	 |  [详情参考](https://help.aliyun.com/document_detail/156876.htm?#section-mcp-kix-v2j)   | FC原始的 context参数|
+
 
 ## 高级选项
 
