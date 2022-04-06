@@ -11,16 +11,16 @@
 此模块可以方便的将传统的 web 框架使用 [Nodejs runtime](https://help.aliyun.com/document_detail/58011.html) 的形式运行在阿里云函数计算。
 
 - [快速开始](#快速开始)
-  - [为什么要使用Nodejs runtime](#为什么要使用Nodejs runtime)
+  - [为什么要使用原生运行环境](#为什么要使用原生运行环境)
   - [框架支持](#框架支持)
   - [快速体验](#快速体验)
-    - [Express基本示例](#Express基本示例)
+    - [基本示例](#基本示例)
     - [高级选项](#高级选项)
   - [示例代码](https://github.com/devsapp/start-web-framework/tree/master/web-framework/nodejs/nodejs-runtime)
 - [关于我们](#关于我们)
 
 ## 快速开始
-### 为什么要使用Nodejs runtime
+### 为什么要使用原生运行环境
 将nodejs应用部署在函数计算FC上，一般有下面几种方式
 - [原生Nodejs运行环境](https://help.aliyun.com/document_detail/58011.html)
 - [Custom Runtime](https://help.aliyun.com/document_detail/132044.html)
@@ -71,7 +71,7 @@ FC-http目前已经支持主流Nodejs框架快速接入，并提供模版示例�
 ```
 $ npm i @serverless-devs/fc-http
 ```
-### Express基本示例
+### 基本示例
 - 基本示例
 ```
 const serverless = require('@serverless-devs/fc-http');
