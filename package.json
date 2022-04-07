@@ -19,7 +19,7 @@
   ],
   "dependencies": {
     "raw-body": "^2.5.1",
-    "serverless-http": "^2.7.0"
+    "serverless-http": "^3.0.1"
   },
   "author": "@serverless-devs",
   "license": "ISC",
