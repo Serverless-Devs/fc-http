@@ -1,4 +1,4 @@
-const serverless = require('serverless-http');
+const serverless = require('@serverless-devs/serverless-http');
 const getRawBody = require('raw-body');
 
 const makeResolver = (ctx) => {
