@@ -1,0 +1,55 @@
+edition: 1.0.0
+name: hello-world-app
+access: default
+
+vars:
+  region: cn-hangzhou
+  service:
+    name: fc-http-service
+    description: 'hello world by serverless devs'
+    logConfig: auto
+
+services:
+  helloworld:
+    component: fc
+    props:
+      region: ${vars.region}
+      service: ${vars.service}
+      function:
+        name: start-fc-http-nodejs14
+        description: 'hello world by serverless devs'
+        runtime: nodejs14
+        codeUri: ./code
+        handler: index.handler
+        memorySize: 128
+        timeout: 60
+      triggers:
+        - name: httpTrigger
+          type: http
+          config:
+            authType: anonymous
+            methods:
+              - GET
+      customDomains:
+        - domainName: auto
+          protocol: HTTP
+          routeConfigs:
+            - path: /*
+              methods:
+                - GET
+                - POST
+
+#  next-function: # 第二个函数的案例，仅供参考
+#    # 如果在当前项目下执行 s deploy，会同时部署模块：
+#    #   helloworld：服务hello-world-service，函数cpp-event-function
+#    #   next-function：服务hello-world-service，函数next-function-example
+#    # 如果想单独部署当前服务与函数，可以执行 s + 模块名/业务名 + deploy，例如：s next-function deploy
+#    # 如果想单独部署当前函数，可以执行 s + 模块名/业务名 + deploy function，例如：s next-function deploy function
+#    # 更多命令可参考：https://www.serverless-devs.com/fc/readme#文档相关
+#    component: fc
+#    props:
+#      region: ${vars.region}
+#      service: ${vars.service} # 应用整体的服务配置
+#      function: # 定义一个新的函数
+#        name: next-function-example
+#        description: 'hello world by serverless devs'

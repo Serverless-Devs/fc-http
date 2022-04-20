@@ -1,6 +1,6 @@
 {
   "name": "@serverless-devs/fc-http",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "running web framework(express,koa) on aliyun function computer with nodejs runtime",
   "main": "src/index.js",
   "repository": {
@@ -19,7 +19,7 @@
   ],
   "dependencies": {
     "raw-body": "^2.5.1",
-    "serverless-http": "^2.7.0"
+    "@serverless-devs/serverless-http": "^3.0.1"
   },
   "author": "@serverless-devs",
   "license": "ISC",
