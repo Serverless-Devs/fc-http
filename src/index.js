@@ -8,6 +8,7 @@ const makeResolver = (ctx) => {
       response.setStatusCode(data.statusCode);
     } else {
       response.status = data.statusCode;
+      response.statusCode = data.statusCode;
     }
     for (const key in data.headers) {
       if (data.headers.hasOwnProperty(key)) {
