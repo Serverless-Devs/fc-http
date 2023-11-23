@@ -1,3 +1,4 @@
+> 注意⚠️，fc-http 暂时 不支持FC3.0。
 # fc-http
 <p align="center" class="flex justify-center">
   <a href="https://nodejs.org/en/" class="ml-1">
